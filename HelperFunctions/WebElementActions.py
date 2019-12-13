@@ -1,6 +1,8 @@
 import datetime
+import time
 
 from HelperFunctions.Core import driver
+from HelperFunctions.Constants import Constants
 
 driver = driver()
 
@@ -20,6 +22,8 @@ class Actions:
 
     @staticmethod
     def select_dropdown_value(dropdown, value):
+        if dropdown == Constants.datacenter_location:
+            time.sleep(0.2)
         dropdown_object = driver.find_element_by_xpath(dropdown)
         dropdown_text = dropdown_object.text
         dropdown_object.click()
