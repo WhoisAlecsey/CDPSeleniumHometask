@@ -12,10 +12,6 @@ class MyListener(AbstractEventListener):
     def before_find(self, by, value, driver):
         WebDriverWait(driver, 10).until(EC.visibility_of(driver.find_element_by_xpath(value)))
 
-    # def after_find(self, by, value, driver):
-    #     value_text = str(driver.find_element_by_xpath(value).text).replace("  ", "")
-    #     print(f"{value_text} - PASSED")
-
     def on_exception(self, exception, driver):
         driver.save_screenshot(f"..\Screenshots\Screen- {datetime.datetime.now().strftime('%m/%d_%H:%M')}.png")
         raise exception
@@ -25,7 +21,6 @@ def driver():
     driver = EventFiringWebDriver(webdriver.Chrome(), MyListener())
     driver.maximize_window()
     driver.implicitly_wait(10)
-    # request.addfinalizer(driver.quit)
     return driver
 
 
